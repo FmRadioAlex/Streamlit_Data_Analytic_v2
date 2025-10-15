@@ -12,6 +12,25 @@ else:
 
 st.set_page_config(page_title="Silver Manager", page_icon="💰", layout="centered")
 
+
+
+PASSWORD = "Еrtdf56!"  # Change this to your desired password
+
+if "authenticated" not in st.session_state:
+    st.session_state.authenticated = False
+
+if not st.session_state.authenticated:
+    st.title("🔐 Вхід до Silver Manager")
+    pwd = st.text_input("Введи пароль:", type="password")
+    if st.button("Увійти"):
+        if pwd == PASSWORD:
+            st.session_state.authenticated = True
+            st.success("✅ Вхід дозволено!")
+            st.rerun()
+        else:
+            st.error("❌ Невірний пароль!")
+    st.stop()
+
 tabs = st.tabs(["💰 Головна", "📊 Статистика"])
 
 with tabs[0]:
