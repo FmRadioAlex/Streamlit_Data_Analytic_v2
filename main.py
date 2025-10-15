@@ -5,7 +5,6 @@ from datetime import datetime
 
 DATA_FILE = "silver_data.csv"
 
-# --- Завантажуємо або створюємо таблицю ---
 if os.path.exists(DATA_FILE):
     df = pd.read_csv(DATA_FILE)
 else:
@@ -13,13 +12,17 @@ else:
 
 st.set_page_config(page_title="Silver Manager", page_icon="💰", layout="centered")
 
-# --- Верхнє меню ---
 tabs = st.tabs(["💰 Головна", "📊 Статистика"])
 
-# === 💰 ГОЛОВНА ===
 with tabs[0]:
     st.header("💰 Silver Manager")
+    st.sidebar.subheader("📂 Завантажити CSV")
+    uploaded_file = st.sidebar.file_uploader("Оберіть файл CSV", type="csv")
 
+    if uploaded_file:
+        df = pd.read_csv(uploaded_file)
+        df.to_csv(DATA_FILE, index=False)
+        st.sidebar.success("✅ Файл завантажено та збережено!")
     with st.sidebar:
         st.subheader("➕ Додати компенсацію")
         with st.form("add_form"):
@@ -59,7 +62,6 @@ with tabs[0]:
     st.subheader("📋 Поточні компенсації")
     st.dataframe(df, use_container_width=True)
 
-# === 📊 СТАТИСТИКА ===
 with tabs[1]:
     st.header("📊 Статистика компенсацій")
     if df.empty:
