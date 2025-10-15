@@ -11,12 +11,11 @@ else:
     df = pd.DataFrame(columns=["Date", "Nick", "Silver", "Given"])
 
 st.set_page_config(page_title="Silver Manager", page_icon="💰", layout="centered")
-PASSWORD = st.secrets["PASSWORD"]
+PASSWORD = st.secrets.get("PASSWORD", None)
 
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
-# перевірка:
 if not st.session_state.authenticated:
     pwd = st.text_input("Пароль:", type="password")
     if st.button("Увійти") and pwd == PASSWORD:
