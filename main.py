@@ -11,7 +11,7 @@ else:
     df = pd.DataFrame(columns=["Date", "Nick", "Silver", "Given"])
 
 st.set_page_config(page_title="Silver Manager", page_icon="💰", layout="centered")
-PASSWORD = st.secrets["PASSWORD"]
+PASSWORD = st.secrets["password"]
 
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
@@ -91,3 +91,4 @@ with tabs[1]:
         st.subheader("🏆 Топ отримувачів (за сумою)")
         top_chart = df.groupby("Nick")["Silver"].sum().sort_values(ascending=False).head(10)
         st.bar_chart(top_chart)
+
