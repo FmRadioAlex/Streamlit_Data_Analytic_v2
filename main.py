@@ -25,7 +25,7 @@ if not st.session_state.authenticated:
         if nick in users and pwd == users[nick]:
             st.session_state.authenticated = True
             st.session_state.user = nick
-            st.experimental_rerun()  
+            st.rerun()  
         else:
             st.error("Невірний нік або пароль.")
     st.stop()
