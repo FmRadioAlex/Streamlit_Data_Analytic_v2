@@ -11,16 +11,23 @@ else:
     df = pd.DataFrame(columns=["Date", "Nick", "Silver", "Given"])
 
 st.set_page_config(page_title="Silver Manager", page_icon="💰", layout="centered")
-PASSWORD = st.secrets.get("PASSWORD", None)
+# PASSWORD = st.secrets.get("PASSWORD", None)
 
 if "authenticated" not in st.session_state:
     st.session_state.authenticated = False
 
 if not st.session_state.authenticated:
-    pwd = st.text_input("Пароль:", type="password")
-    if st.button("Увійти") and pwd == PASSWORD:
-        st.session_state.authenticated = True
-        st.rerun()
+    nick = st.text_input("Нік:")
+    pwd  = st.text_input("Пароль:", type="password")
+
+    if st.button("Увійти"):
+        users = st.secrets["database"]["users"]  
+        if nick in users and pwd == users[nick]:
+            st.session_state.authenticated = True
+            st.session_state.user = nick
+            st.experimental_rerun()  
+        else:
+            st.error("Невірний нік або пароль.")
     st.stop()
 
 tabs = st.tabs(["💰 Головна", "📊 Статистика"])
