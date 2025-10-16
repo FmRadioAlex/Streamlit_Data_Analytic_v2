@@ -41,7 +41,7 @@ with tabs[0]:
         df = pd.read_csv(uploaded_file)
         df.to_csv(DATA_FILE, index=False)
         st.sidebar.success("✅ Файл завантажено та збережено!")
-        st.dataframe(df.style.format({"Silver": "{:,}"}))
+        
     with st.sidebar:
         st.subheader("➕ Додати компенсацію")
         with st.form("add_form"):
@@ -79,7 +79,7 @@ with tabs[0]:
             st.info("🎉 Усі компенсації видані!")
 
     st.subheader("📋 Поточні компенсації")
-    st.dataframe(df, use_container_width=True)
+    st.dataframe(df.style.format({"Silver": "{:,}"}), use_container_width=True)
 
 with tabs[1]:
     st.header("📊 Статистика компенсацій")
