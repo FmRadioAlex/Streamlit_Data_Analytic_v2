@@ -77,7 +77,6 @@ Authentication	простий логін/пароль
 ```bash
 git clone https://github.com/your_username/Streamlit_Data_Analytic_v2.git
 cd Streamlit_Data_Analytic_v2
-pip install -r requirements.txt
 streamlit run app.py
 ```
 🖼 Скриншоти
